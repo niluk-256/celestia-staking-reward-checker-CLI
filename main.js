@@ -1,8 +1,16 @@
 import { getSpendableBalance,getAccount,getDelegationDetails,delegatorAddress,delegationRewardsValidator , delegationRewardsAmounts , delegationShares , getDelegatorsRewards, getCelestiaUsdPrice } from "./celestia.js";
+import  chalk from "chalk";
 
+const address = "celestia1qe8uuf5x69c526h4nzxwv4ltftr73v7q3l4fzp";
+if (!address) {
+  console.log("Provide an celestia address");
+  process.exit(1);
+}
 
-const address = "celestia1hm2d8e6nd5ngtlte3hlded03vgj3rer9sne5de";
 const decimal = 10 ** 6
+
+
+
 async function main() {
   const TIAUsdPrice = await getCelestiaUsdPrice();
   
@@ -10,13 +18,18 @@ async function main() {
 
 const getAccountDetails = await  getAccount(address) 
   const balance = await getSpendableBalance(address);
-  console.log("Account address :" , getAccountDetails.account.address);
-  console.log("Account @type : ", getAccountDetails.account["@type"]);
-  console.log("Account publickey :" , getAccountDetails.account.pub_key.key);
-  console.log("Account number : " , getAccountDetails.account.account_number);
-  console.log("Spendable balance with decimals TIA : ", balance.balances[0].amount);
+  console.log("\n");
+  console.log(chalk.yellow("=======================Account Details[+]=========================================="))
+  console.log(chalk.yellow("Account address :" , getAccountDetails.account.address));
+  console.log(chalk.yellow("Account @type : ", getAccountDetails.account["@type"]));
+  console.log(chalk.yellow("Account publickey :" , getAccountDetails.account.pub_key.key));
+  console.log(chalk.yellow("Account number : " , getAccountDetails.account.account_number));
+  console.log("\n");
+  console.log("===========================Equity[+]====================================")
+
+  console.log(chalk.blue("Spendable balance with decimals TIA : "), balance.balances[0].amount);
   console.log(
-    "Spendable Value TIA in USD : $ %s ",
+    chalk.blue("Spendable Value TIA in USD : $ %s "),
     (Number(balance.balances[0].amount) /decimal ) * TIAUsdPrice
   );
   
@@ -31,15 +44,17 @@ const getAccountDetails = await  getAccount(address)
 
   if(Array.isArray(deleShares)){
           if(deleShares.length > 0 ){
-console.log("delegationSharesInUSD : $ %s",Number((deleShares[0] /decimal) *TIAUsdPrice ))
+console.log(chalk.red("delegationSharesInUSD : $ %s"),Number((deleShares[0] /decimal) *TIAUsdPrice ))
     }
   }
 const rewards = delegationRewardsAmounts(delegatorsRewardsDetails)
 if(rewards[0][0]){
       console.log("Rewards : " , rewards[0][0])
  if(rewards[0][0].amount) {
-  console.log("Rewards :" , rewards[0][0].amount) 
- console.log("Reward in USD : $ %s " , (Number(rewards[0][0].amount)/decimal) * TIAUsdPrice) 
-  }
+  console.log(chalk.blue("Staking rewards : %s TIA") , rewards[0][0].amount /decimal) 
+ console.log(chalk.green("Staking reward in USD : $ %s ") , (Number(rewards[0][0].amount)/decimal) * TIAUsdPrice) 
+  
+  console.log("=====================================================================")
+    }
 }}
 main();

@@ -1,3 +1,6 @@
+
+#### A quick tool to check delegation rewards && account details via terminal 
+
 ```bash
 
 npm i 
@@ -12,29 +15,33 @@ getDelegatorsRewards, getCelestiaUsdPrice } from "./celestia.js";
 
 const address = "ADDRESS THAT YOU WANNA FINDOUT!";
 
+In .bashrc / .zshrc add ,
+alias tia='"/home/{ur username }/celestia_js/quickcheck.sh"'
 
 ```
 
+```js
 
-```bash
+now just type  tia as a command in the terminal  and press enter thats it 😉
 
-node main.js 
+Example random address onchain,
 
-Example output :
-
-Account address : celestia1hm2d8e6nd5ngtlte3hlded03vgj3rer9sne5de
+tia
+=======================Account Details[+]==========================================
+Account address : celestia1qe8uuf5x69c526h4nzxwv4ltftr73v7q3l4fzp
 Account @type :  /cosmos.auth.v1beta1.BaseAccount
-Account publickey : AlhVLe8NzaLROd4Pz93hJnU17OVLmOWcN3lvKHw/7tj2
-Account number :  93847
-Spendable balance with decimals TIA :  7916000
-Spendable Value TIA in USD : $ 21.689840000000004
-delegatorAddress : [ 'celestia1hm2d8e6nd5ngtlte3hlded03vgj3rer9sne5de' ]
-delegationShares : [ '56000000000.000000000000000000' ]
-Validator address : [ 'celestiavaloper1hm2d8e6nd5ngtlte3hlded03vgj3rer94vmdml' ]
-delegationSharesInUSD : $ 153440
-Rewards :  { denom: 'utia', amount: '96330537.512798736000000000' }
-Rewards : 96330537.512798736000000000
-Reward in USD : $ 263.94567278506855
+Account publickey : AuWYtBbktzO6xMxXxpCAvbtCgwTfMu6OnmHZzXO+OBiV
+Account number :  134776
 
-
+===========================Equity[+]====================================
+Spendable balance with decimals TIA :  2599946872
+Spendable Value TIA in USD : $ 6369.8698364
+delegatorAddress : [ 'celestia1qe8uuf5x69c526h4nzxwv4ltftr73v7q3l4fzp' ]
+delegationShares : [ '60000000000.000000000000000000' ]
+Validator address : [ 'celestiavaloper1qe8uuf5x69c526h4nzxwv4ltftr73v7q5qhs58' ]
+delegationSharesInUSD : $ 147000
+Rewards :  { denom: 'utia', amount: '179283182.654626680000000000' }
+Staking rewards : 179.28318265462667 TIA
+Staking reward in USD : $ 439.24379750383537
+=====================================================================
 ```
